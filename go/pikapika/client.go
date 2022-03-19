@@ -62,6 +62,15 @@ func changeProxyUrl(urlStr string) bool {
 				return dialer.DialContext(ctx, network, addr)
 			},
 		}
+		imageHttpClient.Transport = &http.Transport{
+			TLSHandshakeTimeout:   time.Second * 10,
+			ExpectContinueTimeout: time.Second * 10,
+			ResponseHeaderTimeout: time.Second * 10,
+			IdleConnTimeout:       time.Second * 10,
+			DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
+				return dialer.DialContext(ctx, network, addr)
+			},
+		}
 		return false
 	}
 	client.Transport = &http.Transport{
@@ -80,6 +89,23 @@ func changeProxyUrl(urlStr string) bool {
 			}
 			if sAddr, ok := switchAddresses[switchAddress]; ok {
 				addr = sAddr
+			}
+			return proxy.Dial(network, addr)
+		},
+	}
+	imageHttpClient.Transport = &http.Transport{
+		TLSHandshakeTimeout:   time.Second * 10,
+		ExpectContinueTimeout: time.Second * 10,
+		ResponseHeaderTimeout: time.Second * 10,
+		IdleConnTimeout:       time.Second * 10,
+		DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
+			proxyUrl, err := url.Parse(urlStr)
+			if err != nil {
+				return nil, err
+			}
+			proxy, err := proxy.FromURL(proxyUrl, proxy.Direct)
+			if err != nil {
+				return nil, err
 			}
 			return proxy.Dial(network, addr)
 		},
