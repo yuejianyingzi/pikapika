@@ -95,7 +95,7 @@ VPN->代理->分流, 这三个功能如果同时设置, 您会在您手机的VPN
   go install github.com/go-flutter-desktop/hover@latest
   ```
 
-  &- niuhuan/hover支持使用代理下载flutter引擎
+  您也可以使用非官方的hover, 将上面的mod名称改为github.com/niuhuan/hover, 支持使用代理下载flutter引擎
   ```shell
   export GHPROXY=true
   hover build
