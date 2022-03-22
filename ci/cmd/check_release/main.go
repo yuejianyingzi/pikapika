@@ -58,8 +58,6 @@ func main() {
 			"target_commitish": mainBranch,
 			"name":             version.Code,
 			"body":             version.Info,
-			"draft":            true,
-			"prerelease":       false,
 		}
 		var buff []byte
 		buff, err = json.Marshal(&body)
