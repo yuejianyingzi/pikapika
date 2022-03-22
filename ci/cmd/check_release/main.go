@@ -55,6 +55,7 @@ func main() {
 		url := fmt.Sprintf("https://api.github.com/repos/%v/%v/releases", owner, repo)
 		body := map[string]interface{}{
 			"tag_name":         version.Code,
+			"target_commitish": mainBranch,
 			"name":             version.Code,
 			"body":             version.Info,
 			"draft":            true,
@@ -78,13 +79,13 @@ func main() {
 			panic(nil)
 		}
 		defer createReleaseResponse.Body.Close()
-		if createReleaseResponse.StatusCode != 200 {
+		if createReleaseResponse.StatusCode != 201 {
 			buff, err = ioutil.ReadAll(createReleaseResponse.Body)
 			if err != nil {
 				panic(nil)
 			}
 			println(string(buff))
-			panic("NOT 200")
+			panic("NOT 201")
 		}
 	}
 }
