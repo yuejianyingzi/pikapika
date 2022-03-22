@@ -90,12 +90,12 @@ jobs:
 
       - if: ${{steps.check_asset.outputs.*}} == "BUILD"
         name: Cache Flutter dependencies
-          uses: actions/cache@v3
-          with:
-            path: /opt/hostedtoolcache/flutter
-            key: ${{ runner.OS }}-flutter-cache-${{ env.flutter_version }}-${{ env.flutter_channel }}-${{ hashFiles('**/pubspec.lock') }}
-            restore-keys: |
-              ${{ runner.OS }}-flutter-cache-${{ env.flutter_version }}-${{ env.flutter_channel }}
+        uses: actions/cache@v3
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: ${{ runner.OS }}-flutter-cache-${{ env.flutter_version }}-${{ env.flutter_channel }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-flutter-cache-${{ env.flutter_version }}-${{ env.flutter_channel }}
 
       - if: ${{steps.check_asset.outputs.*}} == "BUILD"
         uses: subosito/flutter-action@v2.3.0
