@@ -35,9 +35,11 @@ jobs:
       - name: Check release
         run: |
           cd ci
-          go run cmd/check_release
+          go run ./cmd/check_release
 
   build_release_assets:
+    needs:
+      - check_release
     name: Build release assets
     strategy:
       matrix:
@@ -74,7 +76,7 @@ jobs:
         name: Check asset
         run: |
           cd ci
-          go run cmd/check_asset
+          go run ./cmd/check_asset
 
       - if: ${{steps.check_asset.outputs.*}} == "BUILD"
         name: Cache Go modules
