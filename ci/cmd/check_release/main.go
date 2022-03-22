@@ -80,6 +80,11 @@ func main() {
 		}
 		defer createReleaseResponse.Body.Close()
 		if createReleaseResponse.StatusCode != 200 {
+			buff, err = ioutil.ReadAll(createReleaseResponse.Body)
+			if err != nil {
+				panic(nil)
+			}
+			println(string(buff))
 			panic("NOT 200")
 		}
 	}
