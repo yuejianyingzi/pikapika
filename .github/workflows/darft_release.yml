@@ -56,7 +56,6 @@ jobs:
             host: ubuntu-latest
           - target: android-x86_64
             host: ubuntu-latest
-    needs: [ style ]
     runs-on: ${{ matrix.config.host }}
 
     env:
