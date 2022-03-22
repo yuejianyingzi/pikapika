@@ -55,7 +55,6 @@ func main() {
 		url := fmt.Sprintf("https://api.github.com/repos/%v/%v/releases", owner, repo)
 		body := map[string]interface{}{
 			"tag_name":         version.Code,
-			"target_commitish": mainBranch,
 			"name":             version.Code,
 			"body":             version.Info,
 			"draft":            true,
