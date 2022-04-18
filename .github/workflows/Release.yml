@@ -130,10 +130,10 @@ jobs:
 
       - name: Check core
         uses: actions/checkout@v3
-          with:
-            repository: 'niuhuan/pikapika-go-core'
-            token: ${{ secrets.GH_TOKEN }}
-            path: 'go'
+        with:
+          repository: 'niuhuan/pikapika-go-core'
+          token: ${{ secrets.GH_TOKEN }}
+          path: 'go'
 
       - name: Cache Flutter dependencies (Linux/Android)
         if: steps.check_asset.outputs.skip_build != 'true' && ( matrix.config.target == 'android-arm32' || matrix.config.target == 'android-arm64' || matrix.config.target == 'android-x86_64' || matrix.config.target == 'linux' )
